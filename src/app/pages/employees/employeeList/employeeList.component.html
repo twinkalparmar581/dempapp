@@ -1,0 +1,120 @@
+<div class="mat-elevation-z8  m-10">
+
+  <div class="card">
+    <div class=" py-4 m-5" >
+      <h2 class="title m-0">
+        <div fxFlex="40" fxLayoutAlign="start center">
+          <h2 class="title m-0">Employees</h2>
+        </div>
+        <div fxFlex="60" fxLayoutAlign="end center">
+          <button color="primary"  mat-raised-button type="button" (click)="loadAddEditEmployee('',false)">
+            Add Employee 
+          </button>
+        </div>
+      </h2>
+    </div>
+    <div class=" py-4 m-5">
+      <div>
+       
+        <div class="table m-5">
+
+          <div class="table  m-5" >
+
+            <table mat-table [dataSource]="dataSource2">
+              <!-- <table mat-table [dataSource]="dataSource"> -->
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="SrNo">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef> Employee No </th>
+                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                  <td mat-cell *matCellDef="let element of employees "> {{element.id}} </td>
+                </tr>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="employeeName">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+                  <td mat-cell *matCellDef="let element of employees"> {{element.employeeName}} </td>
+                </tr>
+              </ng-container>
+
+              <!-- designation Column -->
+              <ng-container matColumnDef="designation">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef> Designation </th>
+                  <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+                  <td mat-cell *matCellDef="let element of employees"> {{element.designation}} </td>
+                </tr>
+              </ng-container>
+
+              <!-- department Column -->
+              <ng-container matColumnDef="department">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef> Department </th>
+                  <td mat-cell *matCellDef="let element"> {{element.department.departmentName}} </td>
+                  <td mat-cell *matCellDef="let element of employees"> {{element.department?.departmentName}} </td>
+                </tr>
+              </ng-container>
+
+              <ng-container matColumnDef="contactNo">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef> Contact No </th>
+                  <td mat-cell *matCellDef="let element"> {{element.contactNo}} </td>
+                  <td mat-cell *matCellDef="let element of employees"> {{element.contactNo}} </td>
+                </tr>
+              </ng-container>
+
+              <ng-container matColumnDef="emailId">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef> Email </th>
+                  <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
+                  <td mat-cell *matCellDef="let element of employees"> {{element.emailId}} </td>
+                </tr>
+              </ng-container>
+
+              <ng-container matColumnDef="gender">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef> Gender </th>
+                  <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                  <td mat-cell *matCellDef="let element of employees"> {{element.gender}} </td>
+                </tr>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef>Actions </th>
+                  <td mat-cell *matCellDef="let element of employees">
+                    <button mat-icon-button (click)="loadAddEditEmployee(element.id,false)" class="iconbutton"
+                      color="primary">
+                      <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                   
+                    <button mat-icon-button matTooltip="Click to View" (click)="loadAddEditEmployee(element.id,true)"
+                      class="iconbutton" color="primary">
+                      <mat-icon aria-label="View">visibility</mat-icon>
+                    </button>
+
+                    <button mat-icon-button (click)="deleteEmployee(element.id)" class="iconbutton" color="warn">
+                      <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>

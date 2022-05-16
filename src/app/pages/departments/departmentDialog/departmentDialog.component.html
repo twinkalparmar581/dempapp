@@ -1,0 +1,74 @@
+<div class="dialog-content-wrapper">
+
+
+  <div class="pb-4" fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+
+    <div fxFlex="40%">
+      <h2>Department</h2>
+    </div>
+
+    <div fxFlex="60%" fxLayoutAlign="end">
+      <button class="text-secondary" (click)="closeDialog(false)" mat-dialog-close mat-icon-button type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-content>
+
+
+    <form *ngIf="!isView" class=" p-0 pb-0 m-0 pt-8 " id="departmentForm" [formGroup]="departmentForm"
+      (ngSubmit)="onSubmit()" autocomplete="off">
+
+      <div fxLayout="column" fxFlex="100%">
+      
+
+          <mat-form-field>
+            <input matInput placeholder="Department Name" formControlName="departmentName">
+
+
+          </mat-form-field>
+
+
+        
+      </div>
+
+
+    </form>
+
+    <div *ngIf="isView" fxFlex="100" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+
+
+
+
+
+      <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+
+
+
+        <div class="info-line" fxFlex="100" fxFlex.lt-md="100">
+          <div class="text-title"><b> Department</b></div>
+          <div class="info">{{departmentDetails?.departmentName || '-'}} </div>
+
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+
+    <div mat-dialog-actions fxLayoutAlign="end" *ngIf="!isView">
+
+      <button mat-button mat-dialog-close>Cancel</button>
+
+      <button mat-flat-button color="accent" type="submit" form="departmentForm" [disabled]="disableSubmitButton()">
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,170 @@
+<div class="dialog-content-wrapper">
+
+
+  <div class="pb-4" fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+
+    <div fxFlex="40%">
+      <h2>Employee</h2>  
+    </div>
+
+    <div fxFlex="60%" fxLayoutAlign="end">
+      <button class="text-secondary" (click)="closeDialog(false)" mat-dialog-close mat-icon-button type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+  </div>
+
+  <mat-divider ></mat-divider>
+
+  <div mat-dialog-content  > 
+
+
+    <form *ngIf="!isView" class=" p-0 pb-0 m-0 pt-8 " id="employeeForm" [formGroup]="employeeForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+      <div fxLayout="column" fxFlex="100%">
+        <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+
+          <mat-form-field fxFlex="50%">
+            <input matInput placeholder="Employee Name" formControlName="employeeName">
+            <!-- <mat-error
+            *ngIf="employeeForm.get('employeeName').invalid ">
+            Employee Name already exists 
+            </mat-error> -->
+
+          </mat-form-field>
+
+          <mat-form-field fxFlex="50%">
+            <input matInput placeholder="Contct No" formControlName="contactNo">
+          
+          </mat-form-field>
+        </div>
+
+
+        <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+
+          <mat-form-field fxFlex="50%">
+            <input matInput placeholder="Email" formControlName="emailId">
+           
+          </mat-form-field>
+
+          <div fxLayoutGap=" 10px" fxFlex="50%">
+            <mat-label>Gender</mat-label>
+            <mat-radio-group class="example-radio-group" formControlName ="gender" fxLayoutGap="10px">
+              <mat-radio-button class="example-radio-button" *ngFor="let gender of genders" [value]="gender.id">
+                {{gender.id}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+          <mat-form-field fxFlex="50%">
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="departmentId">
+              <mat-option *ngFor="let department of departments" [value]="department.id"> 
+                {{department.departmentName}}
+              </mat-option>
+            </mat-select>
+          
+          </mat-form-field>
+
+          <mat-form-field fxFlex="50%">
+            <mat-label>Designation</mat-label>
+            <mat-select formControlName="designation">
+              <mat-option *ngFor="let designation of designations" [value]="designation.id">
+                {{designation.id}}
+              </mat-option>
+            </mat-select>
+         
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+
+          <mat-form-field appearance="fill" fxFlex="50%">
+            <mat-label>Joining date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="joiningDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+
+    </form>
+
+    <div *ngIf="isView" fxFlex="100" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+    
+      <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+    
+        <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+          <div class="text-title"><b> Employee Name</b></div>
+          <div class="info">{{ employeeDetails?.employeeName || '-'}} </div>
+        </div>
+    
+        <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+          <div class="text-title"><b> Contact No</b></div>
+          <div class="info">{{employeeDetails?.contactNo || '-'}} </div>
+        </div>
+    
+      </div>
+
+      <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+    
+        <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+          <div class="text-title"><b> Email</b></div>
+          <div class="info">{{employeeDetails?.emailId|| '-'}} </div>
+        </div>
+
+        <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+          <div class="text-title"><b> Gender</b></div>
+          <div class="info">{{employeeDetails?.gender || '-'}} </div>
+        </div>
+    
+      </div>
+    
+      <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+    
+        <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+          <div class="text-title"><b> Designation</b></div>
+          <div class="info">{{employeeDetails?.designation || '-'}} </div>
+        </div>
+    
+        <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+          <div class="text-title"><b> Department</b></div>
+          <div class="info">{{employeeDetails?.department?.departmentName || '-'}} </div>
+    
+        </div>
+    
+    
+    
+      </div>
+
+      <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+        <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+          <div class="text-title"><b> Join Date</b></div>
+          <div class="info">{{employeeDetails?.joiningDate || '-'}} </div>
+    
+        </div>
+
+      </div>
+     
+    
+    
+    
+    </div>
+
+    <div mat-dialog-actions fxLayoutAlign="end"  *ngIf="!isView">
+
+      <button mat-button mat-dialog-close>Cancel</button>
+
+      <button  mat-flat-button color="accent" type="submit" form="employeeForm" [disabled]="disableSubmitButton()">
+        <mat-icon>save</mat-icon> 
+      </button>
+    </div>
+  </div>
+</div>

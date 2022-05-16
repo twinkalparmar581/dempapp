@@ -1,0 +1,70 @@
+<div class="mat-elevation-z8  m-10">
+
+  <div class="card">
+    <div class=" py-4 m-5" >
+      <h2 class="title m-0">
+        <div fxFlex="40" fxLayoutAlign="start center">
+          <h2 class="title m-0">Departments</h2>
+        </div>
+        <div fxFlex="60" fxLayoutAlign="end center">
+          <button color="primary"  mat-raised-button type="button" (click)="loadAddEditDepartment('',false)">
+            Add Department 
+          </button>
+        </div>
+      </h2>
+    </div>
+    <div class=" py-4 m-5">
+      <div>
+       
+        <div class="table m-5">
+
+          <div class="table  m-5" >
+
+            <table mat-table [dataSource]="dataSource2">
+             
+            
+
+              <!-- department Column --> 
+              <ng-container matColumnDef="departmentName">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef> Department </th>
+                  <td mat-cell *matCellDef="let element"> {{element.departmentName}} </td>
+                  <td mat-cell *matCellDef="let element of departments"> {{element.departmentName}} </td>
+                </tr>
+              </ng-container>
+
+            
+
+              <ng-container matColumnDef="actions">
+                <tr>
+                  <th mat-header-cell *matHeaderCellDef>Actions </th>
+                  <td mat-cell *matCellDef="let element of departments">
+                    <button mat-icon-button (click)="loadAddEditDepartment(element.id,false)" class="iconbutton"
+                      color="primary">
+                      <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="deleteDepartment(element.id)" class="iconbutton" color="warn">
+                      <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Click to View" (click)="loadAddEditDepartment(element.id,true)"
+                      class="iconbutton" color="primary">
+                      <mat-icon aria-label="View">visibility</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>

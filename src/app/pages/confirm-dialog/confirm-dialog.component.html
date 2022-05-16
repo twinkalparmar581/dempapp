@@ -1,0 +1,17 @@
+
+
+<div class="confirm-dialog">
+    <div mat-dialog-title fxLayout="row" fxLayoutAlign="space-between center">
+        <div>Confirm</div>
+    </div>
+
+    <mat-dialog-content>
+        <div class="p-4" [innerHTML]="confirmMessage"></div>
+    </mat-dialog-content>
+
+
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="dialogRef.close(true)">Confirm</button>
+        <button mat-button color="primary" class="mat-accent" (click)="dialogRef.close(false)">Cancel</button>
+    </mat-dialog-actions>
+</div>

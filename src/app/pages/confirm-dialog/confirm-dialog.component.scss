@@ -1,0 +1,10 @@
+:host {
+    display: block;
+}
+
+.confirm-dialog {
+    min-width: 220px;
+    max-width: 80vw;
+    pointer-events: auto;
+    position: static;
+}
